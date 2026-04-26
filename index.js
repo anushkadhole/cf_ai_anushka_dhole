@@ -517,10 +517,13 @@ const HTML = `<!DOCTYPE html>
   }
 
   function formatContent(text) {
-    return text
-      .replace(/```(\\w*)\\n?([\\s\\S]*?)```/g, '<pre><code>$2</code></pre>')
-      .replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>')
-      .replace(/\\n/g, '<br>');
+    text = text.replace(/```[\s\S]*?```/g, function(m) {
+      var code = m.slice(3).replace(/^[^\n]*\n/, '').slice(0, -3);
+      return '<pre><code>' + code + '</code></pre>';
+    });
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/\n/g, '<br>');
+    return text;
   }
 
   function updateStats() {
