@@ -1,0 +1,27 @@
+name = "cf-ai-study-coach"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[durable_objects.bindings]]
+name = "STUDY_SESSION"
+class_name = "StudySession"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["StudySession"]
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "SESSIONS_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+
+[vars]
+ENVIRONMENT = "production"
+
+[[rules]]
+type = "Text"
+globs = ["**/*.html", "**/*.css", "**/*.js"]
+fallthrough = true
