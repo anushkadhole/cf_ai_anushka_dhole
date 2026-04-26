@@ -16,7 +16,7 @@ binding = "AI"
 
 [[kv_namespaces]]
 binding = "SESSIONS_KV"
-id = "YOUR_KV_NAMESPACE_ID"
+id = "098f4ddc0114459d8e348b353428cd11"
 
 [vars]
 ENVIRONMENT = "production"
