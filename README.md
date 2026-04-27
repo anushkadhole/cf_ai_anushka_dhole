@@ -1,6 +1,6 @@
-# cf_ai_study_coach
+# cf_ai_project
 
-An AI-powered study coach built entirely on the Cloudflare stack. Ask it anything, get clear explanations, request quizzes on what you've learned, and track your progress — all with persistent memory across your session.
+An AI-powered study coach built entirely on the Cloudflare stack. Ask it anything, get clear explanations, request quizzes on what you've learned, and track your progress all with persistent memory across your session.
 
 ## Architecture
 
