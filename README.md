@@ -2,16 +2,8 @@
 
 An AI-powered study coach built entirely on the Cloudflare stack. Ask it anything, get clear explanations, request quizzes on what you've learned, and track your progress — all with persistent memory across your session.
 
-## Live Demo
-
-Deploy your own in ~2 minutes (see setup below), or use the deployed version:
-> `https://cf-ai-study-coach.<your-subdomain>.workers.dev`
-
----
-
 ## Architecture
 
-```
 User Browser
      │
      ▼
@@ -29,7 +21,6 @@ Cloudflare Workers (src/index.js)
      │                     a 3-question multiple choice quiz as JSON
      │
      └── GET  /progress  → Returns session stats from Durable Object
-```
 
 ### Components
 
@@ -42,26 +33,6 @@ Cloudflare Workers (src/index.js)
 
 ---
 
-## Features
-
-- **Streaming responses** — tokens stream from Llama 3.3 to the browser in real time via Server-Sent Events
-- **Session memory** — Durable Objects store your entire conversation history; the AI has full context of what you've discussed
-- **Topic tracking** — the AI automatically tags each response with a topic; topics appear live in the sidebar
-- **Quiz generation** — click "Quick Quiz" to get a 3-question multiple choice quiz generated from your session history
-- **Progress view** — see how many messages and topics you've covered
-- **Clean chat UI** — dark-mode interface with typing indicators, code block formatting, and suggested starter questions
-
----
-
-## Setup & Deployment
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org) 18+
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/): `npm install -g wrangler`
-- A Cloudflare account (free tier works)
-
-### 1. Clone the repo
 
 ```bash
 git clone https://github.com/<your-username>/cf_ai_study_coach.git
@@ -124,59 +95,6 @@ cf_ai_study_coach/
 
 ## API Reference
 
-### `POST /chat`
-Streams an LLM response for a user message.
-
-**Request body:**
-```json
-{ "message": "Explain how Durable Objects work", "sessionId": "session_abc123" }
-```
-
-**Response:** `text/event-stream` (SSE)
-```
-data: {"response": "Durable "}
-data: {"response": "Objects "}
-data: {"topic": "Durable Objects"}
-data: [DONE]
-```
-
-### `POST /quiz`
-Generates a 3-question multiple choice quiz from the session history.
-
-**Request body:**
-```json
-{ "sessionId": "session_abc123" }
-```
-
-**Response:**
-```json
-{
-  "quiz": [
-    {
-      "question": "What is a Durable Object?",
-      "options": ["A type of KV store", "A stateful Worker instance", "A CDN cache rule", "A DNS record"],
-      "correct": 1
-    }
-  ]
-}
-```
-
-### `GET /progress?sessionId=session_abc123`
-Returns session progress from the Durable Object.
-
-**Response:**
-```json
-{
-  "messageCount": 12,
-  "userMessages": 6,
-  "assistantMessages": 6,
-  "topics": ["Durable Objects", "Workers AI", "KV Storage"],
-  "topicsLearned": 3,
-  "sessionStarted": "2025-04-25T10:00:00.000Z"
-}
-```
-
----
 
 ## How It Works
 
